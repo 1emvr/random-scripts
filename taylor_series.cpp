@@ -1,4 +1,5 @@
 #include <stdint.h>
+// loop for N-series until your computer dies or your mom throws you out of her basement.
 int64_t what_the_fuck(uint64_t x, uint64_t k) { 
     /*
       enjoy ur overflow: 
@@ -30,5 +31,6 @@ int64_t what_the_fuck(uint64_t x, uint64_t k) {
 
     return (int64_t)res / fact; // is this even real?
 }
+
 
 
