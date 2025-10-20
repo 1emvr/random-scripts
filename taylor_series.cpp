@@ -28,6 +28,7 @@ int64_t what_the_fuck(uint64_t x, uint64_t k) {
         }
     }
 
-    return (int64_t)res / fact; // is this real?
+    return (int64_t)res / fact; // is this even real?
 }
+
 
