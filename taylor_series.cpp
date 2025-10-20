@@ -6,7 +6,7 @@ int64_t what_the_fuck(uint64_t x, uint64_t k) {
       could probably store/read overflowed data in a sort of "pseduo" sum.
      */
 
-    // x ^ k
+    // x ^ k (exponent, not xor)
     uint64_t res = 1, base = x, exp = k;
 
     while (exp) {
@@ -31,6 +31,7 @@ int64_t what_the_fuck(uint64_t x, uint64_t k) {
 
     return (int64_t)res / fact; // is this even real?
 }
+
 
 
 
