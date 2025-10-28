@@ -128,9 +128,12 @@ public class IntentInspector {
 	to the system server-stuff over Binder.
 
 ## Example - Call to a System Server Service:
+```
 app code <--> zygote code <--> binder (kernel space in /dev/binder) <--> service code + zygote (will check ACL)
+```
 
 ## Build Process
+```
 - Controlled by Gradle. A similar build system akin to Make/CMake/Ninja
 - Typically done through Android Studio for ease of use.
 - Can include compiler plugins (i.e. Jetpack Compose)
@@ -142,39 +145,46 @@ app code <--> zygote code <--> binder (kernel space in /dev/binder) <--> service
 	- Describes activities, permissions, name and other app information to run.
 	- Resources.asrc contains layout, string xml resources
 
-- Packaged into a signed zip file known as APK 
+- Packaged into a signed zip file known as APK
+```
 
 ## Code Specifics
+```
 - Mainly RE the compiled .dex files (Dalvik bytecode format) but can be converted back to .class/SMALI
 - Java uses a stack-based vm 
 - Dalvik uses a register-based vm
+```
 
 ## Common Evasion Techniques
 - Data encoding (base64):
-	common signature: 
-		android.util.Base64() or minified json format
+	common signature: `android.util.Base64() or minified json format`
 
 - Encryption (AES, DES, XOR(custom), XTEA(custom), ROR)
 	common signature (AES): 
+	```
 		.getInstance("..."), 
 		.generateKey(), 
 		.doFinal(...)
+	```
 
 - Reflection (reference java class/method by string name)
 	common signature: 
+	```
 		.java.lang.reflect(...)
 		.java.lang.Class(...)
+	```
 
 - JNI/NDK (Call native code from Java)
 	common signature:
-		.registerNatives(...)
+		`.registerNatives(...)`
 
 - Dynamic Code Loading (DCL) over C2 traffic
 	common signature:
-		.newInstance of a ClassLoader
+		`.newInstance of a ClassLoader`
 
 - Packing - Similar to DCL but embeded into the app's code
 - Execution Guardrail Techniques (similar to sandbox detection in Windows)
+```
 	- Locale 
 	- SIM Info
 	- Geo IP Cloaking
@@ -183,6 +193,7 @@ app code <--> zygote code <--> binder (kernel space in /dev/binder) <--> service
 	- Device Model Detection
 	- Anti-Frida
 	- Anti-Root
+```
 
 ## Analysis and Detection for Common Methods
 ```
@@ -240,4 +251,5 @@ extra tools: Cyberchef's
 ```
 - Install multiple
 	`adb install-multiple path/to/apks/*`
+
 
