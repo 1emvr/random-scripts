@@ -203,7 +203,7 @@ extra tools: Cyberchef's
 	- Zip/Unzip/Gunzip, etc.
 	- AES Decrypt (CBC/No Padding when padding is already included in the data)
 
-# Common Libs
+## Common Libs
 - retrofit - used for completing HTTP API requests
 - okHttpClient - convenient library for making HTTP requests
 
@@ -215,3 +215,24 @@ extra tools: Cyberchef's
 
 ## Key Notes
 - Avoiding diving "deep" immediately, instead go "wide" and look for common techniques/signatures
+
+## Reversing XML Views (Compose/Flutter/etc)
+- Visiting the listing on the App store can give a lot of good top-level information
+- Use ADB to find the APK Location : `adb shell pm list packages -f | grep your.name.app`
+
+- Pull all APKs (including splits) : 
+	`adb pull /data/app/{path}/base.apk`
+	`adb pull /data/app/{path}/splitConfig.en.apk`, etc.
+	`APK Extractor is a nice application downloadable from the App Store`
+
+- Google Play will detect your device and only give you APKs necessary for it.
+- Sideloaded APKs will typically be a single file.
+
+- APKs are split based on certain elements
+```
+	- Device architecture
+	- Display density
+	- Language
+```
+- Install multiple
+	`adb install-multiple path/to/apks/*`
