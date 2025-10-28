@@ -206,13 +206,14 @@ static: JADX, Cyberchef, Python (Kotlin for Android APIs), AVD/Android Studio, T
 dynamic: mitmproxy, burp buite, httpToolkit, rooted devices as production builds(KernelSU), Frida, IDA Pro, VirusTotal, YARA/SNORT rules
 
 ## Key Notes
-- Avoiding diving "deep" immediately, instead go "wide" and look for common techniques/signatures
+- Avoiding diving "deep" immediately, instead go "wide" and look for common techniques/signatures (Low Hanging Fruit)
 
 ## Check out 
 - LaurieWeird
 - Android Malware Handbook
 - developer.android.com (Documentation)
 - cs.android.com (AOSP)
+
 
 
 
