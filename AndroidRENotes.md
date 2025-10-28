@@ -152,17 +152,23 @@ app code <--> zygote code <--> binder (kernel space in /dev/binder) <--> service
 
 - Encryption (AES, DES, XOR(custom), XTEA(custom), ROR)
 	common signature (AES): 
-		.getInstance("AES/etc"), 
+		.getInstance("..."), 
 		.generateKey(), 
-		.doFinal(plaintext)
+		.doFinal(...)
 
 - Reflection (reference java class/method by string name)
 	common signature: 
-		.java.lang.reflect()
+		.java.lang.reflect(...)
+		.java.lang.Class(...)
 
 - JNI/NDK (Call native code from Java)
+	common signature:
+		.registerNatives(...)
 
 - Dynamic Code Loading (DCL) over C2 traffic
+	common signature:
+		.newInstance of a ClassLoader
+
 - Packing - Similar to DCL but embeded into the app's code
 - Execution Guardrail Techniques (similar to sandbox detection in Windows)
 	- Locale 
@@ -181,6 +187,12 @@ Encryption: 		javax.crypto.cipher 						-> hook .doFinal(...)
 Reflection: 		java.lang.reflect/class 					-> hook .newInstance(...), .forName(...)
 Native CE: 			JNI Exports 								-> hook .registerNatives(...)
 Dynamic Loading: 	DCL, (Dex|Path)ClassLoader 					-> hook .newInstance of ClassLoader
-SIM Info: 			TelephonyManager READ_PHONE_STATE 			-> hook .getCountryNetworkIso 
-
+SIM Info Detect: 	TelephonyManager READ_PHONE_STATE 			-> hook .getCountryNetworkIso 
 ```
+
+## Common Tools
+static: JADX, Cyberchef, Python (Kotlin for Android APIs), AVD/Android Studio, Text and Hex Editors
+
+dynamic: mitmproxy, burp buite, httpToolkit, rooted devices as production builds(KernelSU), Frida, IDA Pro, VirusTotal, YARA/SNORT rules
+
+
