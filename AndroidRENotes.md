@@ -1,10 +1,13 @@
 # Android RE Crash Course
 
 ## Notes about Android Security
+```
 - Sandboxing is insufficient at stopping attacks. 
 - Root or non-apk binary attacks are extremely rare in Android.
+```
 
 ## Names for Android "attack vectors"
+```
 - Phishing:       impersonating a legitimate company or resource to coerce information from someone.
 - Toll Fraud:         signing up the user to services without explicit consent.
 - Maskware:         looks like one thing but does something completely different.
@@ -14,6 +17,7 @@
 - Click Fraud:         auto clicker, often used to gain PPC (pay per click) traffic
 - SMS Fraud:         proxying SMS messages through a pre-owned number
 - Adware:             spamming ads
+```
 
 ## The basics of Android Ecosystem:
 ### Entrypoints (Lifecycle)
@@ -236,3 +240,4 @@ extra tools: Cyberchef's
 ```
 - Install multiple
 	`adb install-multiple path/to/apks/*`
+
