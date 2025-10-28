@@ -147,27 +147,37 @@ app code <--> zygote code <--> binder (kernel space in /dev/binder) <--> service
 
 ## Common Evasion Techniques
 - Data encoding (base64):
-	common signature: 
+	common signature:
+```
 		android.util.Base64() or minified json format
+```
 
 - Encryption (AES, DES, XOR(custom), XTEA(custom), ROR)
 	common signature (AES): 
+```
 		.getInstance("..."), 
 		.generateKey(), 
 		.doFinal(...)
+```
 
 - Reflection (reference java class/method by string name)
 	common signature: 
+```
 		.java.lang.reflect(...)
 		.java.lang.Class(...)
+```
 
 - JNI/NDK (Call native code from Java)
 	common signature:
+```
 		.registerNatives(...)
+```
 
 - Dynamic Code Loading (DCL) over C2 traffic
 	common signature:
+```
 		.newInstance of a ClassLoader
+```
 
 - Packing - Similar to DCL but embeded into the app's code
 - Execution Guardrail Techniques (similar to sandbox detection in Windows)
@@ -194,5 +204,6 @@ SIM Info Detect: 	TelephonyManager READ_PHONE_STATE 			-> hook .getCountryNetwor
 static: JADX, Cyberchef, Python (Kotlin for Android APIs), AVD/Android Studio, Text and Hex Editors
 
 dynamic: mitmproxy, burp buite, httpToolkit, rooted devices as production builds(KernelSU), Frida, IDA Pro, VirusTotal, YARA/SNORT rules
+
 
 
