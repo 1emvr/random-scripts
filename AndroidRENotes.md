@@ -147,37 +147,27 @@ app code <--> zygote code <--> binder (kernel space in /dev/binder) <--> service
 
 ## Common Evasion Techniques
 - Data encoding (base64):
-	common signature:
-```
+	common signature: 
 		android.util.Base64() or minified json format
-```
 
 - Encryption (AES, DES, XOR(custom), XTEA(custom), ROR)
 	common signature (AES): 
-```
 		.getInstance("..."), 
 		.generateKey(), 
 		.doFinal(...)
-```
 
 - Reflection (reference java class/method by string name)
 	common signature: 
-```
 		.java.lang.reflect(...)
 		.java.lang.Class(...)
-```
 
 - JNI/NDK (Call native code from Java)
 	common signature:
-```
 		.registerNatives(...)
-```
 
 - Dynamic Code Loading (DCL) over C2 traffic
 	common signature:
-```
 		.newInstance of a ClassLoader
-```
 
 - Packing - Similar to DCL but embeded into the app's code
 - Execution Guardrail Techniques (similar to sandbox detection in Windows)
@@ -196,17 +186,26 @@ Encoding: 			android.util.Base64 						-> hook .decode(...)
 Encryption: 		javax.crypto.cipher 						-> hook .doFinal(...)
 Reflection: 		java.lang.reflect/class 					-> hook .newInstance(...), .forName(...)
 Native CE: 			JNI Exports 								-> hook .registerNatives(...)
-Dynamic Loading: 	DCL, (Dex|Path)ClassLoader 					-> hook .newInstance of ClassLoader
+Dynamic Loading: 	DCL, (Dex|Path)ClassLoader 					-> hook .newInstance of ClassLoader / .DexClassLoader() / .PathDexClassLoader() / .InMemoryDexClassLoader()
 SIM Info Detect: 	TelephonyManager READ_PHONE_STATE 			-> hook .getCountryNetworkIso 
 ```
+# Note: Dynamic loading can be masked through use of Reflection.
+
+# Extra Credit - Lambda Groups
+- uses an integer identifier and invoked from a switch-statement within a single class
 
 ## Common Tools
-static: JADX, Cyberchef, Python (Kotlin for Android APIs), AVD/Android Studio, Text and Hex Editors
-
+static: JADX, Cyberchef, Python (Kotlin for Android APIs), AVD/Android Studio, Text and Hex Editor
 dynamic: mitmproxy, burp buite, httpToolkit, rooted devices as production builds(KernelSU), Frida, IDA Pro, VirusTotal, YARA/SNORT rules
+extra tools: Cyberchef's 
+	- Entropy tool for high-entropy detection
+	- Detect File Type
+	- Zip/Unzip/Gunzip, etc.
+	- AES Decrypt (CBC/No Padding when padding is already included in the data)
 
-## Key Notes
-- Avoiding diving "deep" immediately, instead go "wide" and look for common techniques/signatures (Low Hanging Fruit)
+# Common Libs
+- retrofit - used for completing HTTP API requests
+- okHttpClient - convenient library for making HTTP requests
 
 ## Check out 
 - LaurieWeird
@@ -214,8 +213,5 @@ dynamic: mitmproxy, burp buite, httpToolkit, rooted devices as production builds
 - developer.android.com (Documentation)
 - cs.android.com (AOSP)
 
-
-
-
-
-
+## Key Notes
+- Avoiding diving "deep" immediately, instead go "wide" and look for common techniques/signatures
