@@ -175,9 +175,12 @@ app code <--> zygote code <--> binder (kernel space in /dev/binder) <--> service
 	- Anti-Root
 
 ## Analysis and Detection for Common Methods
+```
 Encoding: 			android.util.Base64 						-> hook .decode(...)
 Encryption: 		javax.crypto.cipher 						-> hook .doFinal(...)
 Reflection: 		java.lang.reflect/class 					-> hook .newInstance(...), .forName(...)
 Native CE: 			JNI Exports 								-> hook .registerNatives(...)
 Dynamic Loading: 	DCL, (Dex|Path)ClassLoader 					-> hook .newInstance of ClassLoader
 SIM Info: 			TelephonyManager READ_PHONE_STATE 			-> hook .getCountryNetworkIso 
+
+```
